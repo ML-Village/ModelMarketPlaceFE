@@ -19,6 +19,9 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
+
+import { Label, TextInput } from 'flowbite-react';
+
 type Status = {
     value: string
     label: string
@@ -69,30 +72,32 @@ export const CreateResource = () => {
             ">
 
                 {/* functions div */}
-                <div className="w-4/5 border border-orange-300
-                flex flex-col justify-start items-center px-10
+                <div className="w-4/5
+                flex flex-col justify-start items-center px-10 gap-4
                 ">
-                    <div className="w-4/5 border my-2
+                    <div className="w-4/5 my-4
                     text-3xl font-semibold">
-                        Pick From A List of Available Project Contracts To Supply Model Training and Integration Resources To
+                        Pick From A List of Available Project Contracts To Register Model Training and Integration Resources
                     </div>
                     
                     {/* list of shadcn popover */}
                     <div className="
-                    border border-gray-300 w-4/5 rounded
+                    border border-black w-4/5 rounded overflow-hidden
                     flex items-center space-x-4">
-                        <span className="text-sm text-muted-foreground mx-2 px-2 w-[9rem]">Parent Project:</span>
+                        <span className="text-sm text-muted-foreground mx-2 px-2 w-[9rem]
+                        
+                        ">Parent Project:</span>
                         <Popover 
                         open={open} onOpenChange={setOpen}>
                             <PopoverTrigger asChild>
                                 <Button variant="outline" 
-                                className="justify-start border border-red-300
-                                w-full
+                                className="justify-start
+                                w-full border-l-black rounded-none
                                 ">
                                     {selectedStatus ? <>{selectedStatus.label}</> : <>+ Select Parent Project</>}
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent className="p-0" side="bottom" align="start">
+                            <PopoverContent className="p-0 bg-white" side="bottom" align="start">
                                 <Command className="">
                                     <CommandInput placeholder="Select Project..." />
                                     <CommandList>
@@ -119,6 +124,89 @@ export const CreateResource = () => {
                             </PopoverContent>
                         </Popover>
                         </div>
+
+                    {/* project address input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="contractaddress" placeholder="Project Main Contract" addon="Project_Address" required />
+                    </div>
+
+                    {/* project url input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" required />
+                    </div>
+
+                    {/* cover url input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="coverurl" placeholder="Cover Page URL Link" addon="Cover_URL_Link" required />
+                    </div>
+
+                    <div className="w-4/5
+                    text-3xl font-semibold flex flex-col gap-2">
+                        <p className="text-2xl my-4"> --- OR --- </p>
+                        <p className="">Register A New Project Below</p>
+                    </div>
+                    
+                    {/* project address input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="newprojectname" placeholder="New Project Name" addon="New_Project_Name" required />
+                    </div>
+
+                    {/* project address input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="newcontractaddress" placeholder="New Project Main Contract" addon="New_Project_Address" required />
+                    </div>
+
+                    {/* project url input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="newprojectsite" placeholder="New Project HomePage" addon="New_Project_URL" required />
+                    </div>
+
+                    {/* cover url input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="newcoverurl" placeholder="New Cover Page URL Link" addon="New_Cover_URL_Link" required />
+                    </div>
+
+                    {/* new project register button */}
+                    <div className="flex w-4/5 ">
+                        <button className="bg-orange-300 hover:bg-orange-500
+                        font-semibold hover:text-white
+                        px-4 py-2 rounded-md flex justify-center items-center
+                        ">Register New Project</button>
+                    </div>
+
+
+                    <div className="w-4/5 my-2 mt-4
+                    text-3xl font-semibold flex flex-col gap-2">
+                        <p className="">Add a Model Training Library Here</p>
+                    </div>
+
+                    {/* training repo input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="traininrepogurl" placeholder="Training Library URL Link" addon="Training_Lib_URL" required />
+                    </div>
+                    {/* training training docs */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="trainingdocsurl" placeholder="Training Docs URL Link" addon="Training_Docs_URL" required />
+                    </div>
+                    
+                    <br></br>
+
+                    {/* training repo input */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="integrationwrapperaddress" placeholder="Integration Wrapper Address" addon="Integration_Wrapper_Address" required />
+                    </div>
+                    {/* integration resource docs */}
+                    <div className="border border-black w-4/5 rounded-md">
+                        <TextInput id="integrationdocsurl" placeholder="Integration Docs URL" addon="Integration_Docs_URL" required />
+                    </div>
+
+                    {/* project resource submission button */}
+                    <div className="flex w-4/5 ">
+                        <button className="bg-green-300 hover:bg-green-500
+                        font-semibold hover:text-white
+                        px-4 py-2 rounded-md flex justify-center items-center
+                        ">Submit Project Resource</button>
+                    </div>
 
                 </div>
 
@@ -153,8 +241,6 @@ export const CreateResource = () => {
                     </p>
 
                 </div>
-
-                
 
             </div>
         </div>
