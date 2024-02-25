@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/popover";
 
 
-import { Label, TextInput } from 'flowbite-react';
+import { TextInput } from 'flowbite-react';
 
 type Status = {
     value: string
@@ -65,9 +65,9 @@ export const CreateResource = () => {
 
     return (
         <div>
-            <CreateNavBar />
+            <CreateNavBar title="Create Project Resources" />
             
-            <div className="container mx-auto mt-5 border flex justify-between items-start
+            <div className="container mx-auto mt-5 flex justify-between items-start
             px-10 py-4
             ">
 
@@ -135,10 +135,9 @@ export const CreateResource = () => {
                         <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" required />
                     </div>
 
-                    {/* cover url input */}
-                    <div className="border border-black w-4/5 rounded-md">
-                        <TextInput id="coverurl" placeholder="Cover Page URL Link" addon="Cover_URL_Link" required />
-                    </div>
+                    {/* image div of project cover */}
+                    <div className="w-4/5 h-32 
+                        border border-black/80 rounded-md" />
 
                     <div className="w-4/5
                     text-3xl font-semibold flex flex-col gap-2">
@@ -211,7 +210,7 @@ export const CreateResource = () => {
                 </div>
 
                 {/* explanation div */}
-                <div className="border rounded-lg w-[400px]
+                <div className="rounded-lg w-[400px]
                 px-10 py-10 bg-gray-300 ml-auto
                 ">
                     

@@ -9,8 +9,9 @@ export const MarketNavbar = () => {
         )
 }
 
-export const CreateNavBar = () => {
+export const CreateNavBar = ({title}) => {
     return (
-        <Navbase navleft={<NavProjectIntegration/>}/>
+        <Navbase navleft={<NavProjectIntegration title={title}/>}/>
     )
 }
+

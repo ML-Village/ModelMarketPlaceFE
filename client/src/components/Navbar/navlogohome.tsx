@@ -20,13 +20,13 @@ export const Navlogohome = () => {
                     <div className="flex justify-center items-center gap-3
                     text-orange-500
                     mx-4">
-                        <span className="hover:font-bold">Collections</span>
-                        <span className="hover:font-bold">Stats</span>
+                        <span className="hover:font-bold">Builders</span>
+                        <span className="hover:font-bold">Projects</span>
                         <Dropdown label={<span className="hover:font-bold">Create</span>} inline arrowIcon={false}
                         className=""
                         >
                             <Dropdown.Item onClick={()=>navigate(ROUTES.createresource)}>Create Project Resources</Dropdown.Item>
-                            <Dropdown.Item>Create Model</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>navigate(ROUTES.createmodel)}>Create Model</Dropdown.Item>
                         </Dropdown>
                     </div>
                 

@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 
-export const NavProjectIntegration = () => {
+export const NavProjectIntegration = ({title}) => {
     const navigate = useNavigate()
 
     return (
@@ -18,7 +18,7 @@ export const NavProjectIntegration = () => {
                 <FaArrowLeft />
             </span>
             <span className="text-xl">
-                Create Project Resources
+                {title}
             </span>
         </div>
     )
