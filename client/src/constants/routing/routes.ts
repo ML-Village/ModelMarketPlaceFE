@@ -1,7 +1,9 @@
 export const ROUTES = {
     home: "/",
     rooms: "/gameprojects",
-    gamewrapperdevs: "/gamewrappersdevs",
-    modeltrainers: "/modeltrainers",
+    wrapperdevs: "/wrappersdevs",
+    trainingapi: "trainingapi",
+    interfacewrapper: "interfacewrapper",
+    createmodel: "/createmodel",
     listings: "/listings"
 };
