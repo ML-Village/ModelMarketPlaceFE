@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from './constants/routing/routes';
-import { Home } from './pages';
+import { Home, CreateResource } from './pages';
 
 function App() {
 
@@ -10,6 +10,7 @@ function App() {
             <Routes>
                 {/* <Route path='/' element={<Home/>}/> */}
                 <Route path={ROUTES.home} element={<Home />} />
+                <Route path={ROUTES.createresource} element={<CreateResource />} />
             </Routes>
         </Router>
   )

@@ -2,8 +2,11 @@ import React from 'react';
 import { Navbar, Dropdown } from 'flowbite-react';
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routing/routes';
 
 export const Navlogohome = () => {
+    const navigate = useNavigate();
     return (
         <>
             <Navbar.Brand href={import.meta.env.VITE_HOSTURL} 
@@ -22,7 +25,7 @@ export const Navlogohome = () => {
                         <Dropdown label={<span className="hover:font-bold">Create</span>} inline arrowIcon={false}
                         className=""
                         >
-                            <Dropdown.Item>Create Project Wrappers</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>navigate(ROUTES.createresource)}>Create Project Resources</Dropdown.Item>
                             <Dropdown.Item>Create Model</Dropdown.Item>
                         </Dropdown>
                     </div>

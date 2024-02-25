@@ -7,8 +7,8 @@ export const NavProjectIntegration = () => {
         <div className="flex justify-start items-center
         py-1 mx-2
         ">
-            <span className="bg-gray-500/20 rounded-full p-2 mx-3
-            hover:cursor-pointer
+            <span className="bg-gray-500/20 rounded-full p-2 mx-4
+            hover:cursor-pointer hover:bg-gray-700/50
             ">
                 <FaArrowLeft />
             </span>
