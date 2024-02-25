@@ -5,6 +5,7 @@ import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 export const ResultsCard = ({
     projectcoverurl,
+    project,
     modelname,
     description,
     creator,
@@ -17,16 +18,32 @@ export const ResultsCard = ({
     return (
         <Card
                             
-                            className="max-w-sm overflow-hidden cursor-pointer"
+                            className="max-w-sm overflow-hidden cursor-pointer border-gray-500"
                             renderImage={() => 
-                            <img className="cursor-pointer" width={500} height={500} src={projectcoverurl} alt="image 1" />
-                            
-                        }
+                            <div className="flex items-center overflow-hidden w-full h-[200px] 
+                            border-b bg-black"
+                            style={{backgroundImage: `url(${projectcoverurl})`,
+                                    backgroundSize: "contain",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "center center"
+                                    }}
                             >
-                            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                
+                            </div>
+                                
+                            }
+                            >
+                            <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 {modelname}
-                            </h5>
+                            </div>
 
+                            <div><span className="mr-1 font-semibold">project: </span>
+                            <span className="bg-blue-300 px-2 py-1 rounded-md cursor-pointer
+                            hover:ring-2 hover:ring-blue-500
+                            ">
+                                {project}
+                            </span>
+                            </div>
                             <p className="font-normal text-gray-700 dark:text-gray-400">
                                 {description}
                             </p>

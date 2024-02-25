@@ -10,8 +10,9 @@ export const Results = () => {
                 {
                     availableModels.map((r,i)=>{
                         return (
-                            <ResultsCard 
+                            <ResultsCard key={`results-${i}`}
                                 projectcoverurl={r.projectcoverurl} 
+                                project={r.project}
                                 modelname={r.modelname} 
                                 description={r.description}
                                 creator={r.creator}
