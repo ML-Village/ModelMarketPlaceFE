@@ -6,7 +6,7 @@ export const Results = () => {
 
     console.log(availableModels)
     return (
-        <div className="mt-5 grid grid-cols-3 gap-1">
+        <div className="mt-5 grid grid-cols-3 gap-1 gap-y-2">
                 {
                     availableModels.map((r,i)=>{
                         return (

@@ -18,7 +18,7 @@ export const NavProjectIntegration = () => {
                 <FaArrowLeft />
             </span>
             <span className="text-xl">
-                Create Project Integration Resources
+                Create Project Resources
             </span>
         </div>
     )
