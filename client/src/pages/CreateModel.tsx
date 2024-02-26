@@ -67,27 +67,20 @@ export const CreateModel = () => {
     return (
         <div>
             <CreateNavBar title="Create Model for Project" />
-            <div className="container mx-auto mt-5 flex justify-between items-start
-            px-10 py-4
-            ">
+            <div className="container flex items-start justify-between px-10 py-4 mx-auto mt-5 ">
             
                 {/* functions div */}
-                <div className="w-4/5
-                    flex flex-col justify-start items-center px-10 gap-4
-                    ">
+                <div className="flex flex-col items-center justify-start w-4/5 gap-4 px-10 ">
                         
                         {/* 1. select a project */}
-                        <div className="w-4/5 my-4 flex gap-1 items-center
-                            text-3xl font-semibold">
+                        <div className="flex items-center w-4/5 gap-1 my-4 text-3xl font-semibold">
                         
-                            <span className="text-4xl mr-4"><TbCircleNumber1/></span>
+                            <span className="mr-4 text-4xl"><TbCircleNumber1/></span>
                             <span>Select a Project to associate your model with.</span>
                         </div>
 
                         {/* list of shadcn popover */}
-                        <div className="
-                        border border-black w-4/5 rounded overflow-hidden
-                        flex items-center space-x-4">
+                        <div className="flex items-center w-4/5 space-x-4 overflow-hidden border border-black rounded ">
                             <span className="text-sm text-muted-foreground mx-2 px-2 w-[9rem]
                             
                             ">Parent Project:</span>
@@ -95,9 +88,7 @@ export const CreateModel = () => {
                             open={open} onOpenChange={setOpen}>
                                 <PopoverTrigger asChild>
                                     <Button variant="outline" 
-                                    className="justify-start
-                                    w-full border-l-black rounded-none
-                                    ">
+                                    className="justify-start w-full rounded-none border-l-black ">
                                         {selectedStatus ? <>{selectedStatus.label}</> : <>+ Select Parent Project</>}
                                     </Button>
                                 </PopoverTrigger>
@@ -130,35 +121,33 @@ export const CreateModel = () => {
                             </div>
                         
                         {/* image div of project cover */}
-                        <div className="w-4/5 h-32 
-                        border border-black/80 rounded-md">
+                        <div className="w-4/5 h-32 border rounded-md border-black/80">
 
                         </div>
 
                         {/* project address input */}
-                        <div className="border border-black w-4/5 rounded-md">
+                        <div className="w-4/5 border border-black rounded-md">
                             <TextInput id="contractaddress" placeholder="Project Main Contract" addon="Project_Address" required />
                         </div>
 
                         {/* project url input */}
-                        <div className="border border-black w-4/5 rounded-md">
+                        <div className="w-4/5 border border-black rounded-md">
                             <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" required />
                         </div>
                         
 
                         {/* 2. upload model to ipfs */}
-                        <div className="w-4/5 mt-8 flex gap-1 items-center
-                            text-3xl font-semibold">
+                        <div className="flex items-center w-4/5 gap-1 mt-8 text-3xl font-semibold">
                         
-                            <span className="text-4xl mr-4"><TbCircleNumber2/></span>
+                            <span className="mr-4 text-4xl"><TbCircleNumber2/></span>
                             <span>Upload Onnx Model to IPFS</span>
                         </div>
                         {/* project url input */}
-                        <div className="border border-black w-4/5 rounded-md">
+                        <div className="w-4/5 border border-black rounded-md">
                             <TextInput id="modelname" placeholder="Model Name" addon="Model_Name" required />
                         </div>
                         <div className="w-4/5">
-                            <div className="mb-2 block">
+                            <div className="block mb-2">
                                 <Label htmlFor="file-upload" value="Upload Onnx Model to IPFS" />
                             </div>
                                 <FileInput id="file-upload" />
@@ -166,24 +155,18 @@ export const CreateModel = () => {
 
                         {/* model upload button */}
                         <div className="flex w-4/5 ">
-                            <button className="bg-blue-300 hover:bg-blue-500
-                            font-semibold hover:text-white
-                            px-4 py-2 rounded-md flex justify-center items-center
-                            ">Upload Model to IPFS</button>
+                            <button className="flex items-center justify-center px-4 py-2 font-semibold bg-blue-300 rounded-md hover:bg-blue-500 hover:text-white ">Upload Model to IPFS</button>
                         </div>
 
                         {/* 3. Set Sales Params */}
-                        <div className="w-4/5 mt-8 flex gap-1 items-center
-                            text-3xl font-semibold">
+                        <div className="flex items-center w-4/5 gap-1 mt-8 text-3xl font-semibold">
                         
-                            <span className="text-4xl mr-4"><TbCircleNumber3/></span>
+                            <span className="mr-4 text-4xl"><TbCircleNumber3/></span>
                             <span>Set Sales Terms and Parameters</span>
                         </div>
 
                         {/* model mint price input */}
-                        <div className="border border-black w-4/5 rounded-md flex
-                        items-center
-                        ">
+                        <div className="flex items-center w-4/5 border border-black rounded-md ">
                             <Label className="px-4">Model Price</Label>
                             <input id="modelprice" type="number" step="0.01"
                             className="flex-grow text-end" 
@@ -193,9 +176,7 @@ export const CreateModel = () => {
                         </div>
 
                         {/* Number of Units on Sale input */}
-                        <div className="border border-black w-4/5 rounded-md flex
-                        items-center
-                        ">
+                        <div className="flex items-center w-4/5 border border-black rounded-md ">
                             <Label className="px-4">Max Supply</Label>
                             <input id="unitsonsale" type="number" step="1"
                             className="flex-grow text-end" 
@@ -203,28 +184,23 @@ export const CreateModel = () => {
                             />
                         </div>
                         
-                        <div className="w-4/5 rounded-md flex
-                        items-center">
-                            <Checkbox className="text-4xl mx-4" id="unlimitedmint"/>
+                        <div className="flex items-center w-4/5 rounded-md">
+                            <Checkbox className="mx-4 text-4xl" id="unlimitedmint"/>
                             <Label className="text-lg" htmlFor="unlimitedmint">
                                 Unlimited Mint
                             </Label>
                         </div>
 
                         {/* 3. Mint Model NFT */}
-                        <div className="w-4/5 mt-8 flex gap-1 items-center
-                            text-3xl font-semibold">
+                        <div className="flex items-center w-4/5 gap-1 mt-8 text-3xl font-semibold">
                         
-                            <span className="text-4xl mr-4"><TbCircleNumber4/></span>
+                            <span className="mr-4 text-4xl"><TbCircleNumber4/></span>
                             <span>Initialize Model Minting!</span>
                         </div>
                         
                         {/* model mint intialize button */}
                         <div className="flex w-4/5 ">
-                            <button className="bg-green-300 hover:bg-green-500
-                            font-semibold hover:text-white
-                            px-4 py-2 rounded-md flex justify-center items-center
-                            ">Initialize Model Mint!</button>
+                            <button className="flex items-center justify-center px-4 py-2 font-semibold bg-green-300 rounded-md hover:bg-green-500 hover:text-white ">Initialize Model Mint!</button>
                         </div>
 
 
