@@ -20,6 +20,8 @@ trait IProjectRegister<TContractState> {
 
     fn get_project_cover_uri(self: @TContractState, project_id: u256) -> ByteArray;
 
+    fn get_project_id(self: @TContractState, project_address: ContractAddress) -> u256;
+
     fn get_registerd_project_count(self: @TContractState) -> u256;
 
     fn get_modelnft_hash(self: @TContractState) -> ClassHash;
@@ -27,7 +29,7 @@ trait IProjectRegister<TContractState> {
     fn set_modelnft_hash(ref self: TContractState, hash: ClassHash);
 
     // Add register create nft collection function
-    fn create_modelnft_collection(self: @TContractState, 
+    fn create_modelnft_collection(ref self: TContractState, 
         collection_name:felt252, collection_symbol: felt252,
         parent_project_address: ContractAddress, max_supply:u256)-> ContractAddress;
 
@@ -112,6 +114,10 @@ use mlvillage::ProjectRegister::IProjectRegister;
             self.projects_map.read(project_id).project_cover_uri
         }
 
+        fn get_project_id(self: @ContractState, project_address: ContractAddress) -> u256 {
+            self.project_address_to_id.read(project_address)
+        }
+
         fn get_registerd_project_count(self: @ContractState) -> u256 {
             self.project_count.read()
         }
@@ -125,7 +131,8 @@ use mlvillage::ProjectRegister::IProjectRegister;
         }
 
         // Add register create nft collection function
-        fn create_modelnft_collection(self: @ContractState, 
+
+        fn create_modelnft_collection(ref self: ContractState, 
             collection_name:felt252, collection_symbol: felt252,
             parent_project_address: ContractAddress, max_supply:u256) -> ContractAddress{
             let mut calldata = ArrayTrait::new();
