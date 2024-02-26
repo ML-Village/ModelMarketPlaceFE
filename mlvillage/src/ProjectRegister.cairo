@@ -21,7 +21,12 @@ trait IProjectRegister<TContractState> {
 
     fn get_registerd_project_count(self: @TContractState) -> u256;
 
+    fn get_modelnft_hash(self: @TContractState) -> felt252;
+
+    fn set_modelnft_hash(ref self: TContractState, hash: felt252);
+
     // Add register create nft collection function
+    fn create_modelnft_collection(self: @TContractState, project_id: u256);
 
 }
 
@@ -31,7 +36,7 @@ mod ProjectRegister {
     use starknet::ContractAddress;
     use starknet::{StorePacking};
 
-    #[derive(Copy, Drop, Serde, Hash, PartialEq)]
+    #[derive(Drop, Serde, PartialEq, starknet::Store)]
     struct ProjecRecord {
         project_name: ByteArray,
         project_address: ContractAddress,
@@ -43,7 +48,8 @@ mod ProjectRegister {
     struct Storage {
         projects_map: LegacyMap<u256, ProjecRecord>,
         project_address_to_id: LegacyMap<ContractAddress, u256>,
-        project_count: u256
+        project_count: u256,
+        model_nft_hash: felt252
     }
 
     // #[generate_trait]
@@ -103,8 +109,18 @@ mod ProjectRegister {
             self.project_count.read()
         }
 
-        // Add register create nft collection function
+        fn get_modelnft_hash(self: @ContractState) -> felt252 {
+            self.model_nft_hash.read()
+        }
 
+        fn set_modelnft_hash(ref self: ContractState, hash: felt252) {
+            self.model_nft_hash.write(hash);
+        }
+        
+        // Add register create nft collection function
+        fn create_modelnft_collection(self: @ContractState, project_id: u256) {
+            
+        }
     }
 
 
