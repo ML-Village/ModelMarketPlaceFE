@@ -29,8 +29,9 @@ trait IProjectRegister<TContractState> {
 mod ProjectRegister {
 
     use starknet::ContractAddress;
+    use starknet::{StorePacking};
 
-    #[derive(Copy, Drop, Serde, PartialEq)]
+    #[derive(Copy, Drop, Serde, Hash, PartialEq)]
     struct ProjecRecord {
         project_name: ByteArray,
         project_address: ContractAddress,
