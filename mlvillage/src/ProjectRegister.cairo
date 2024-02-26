@@ -145,7 +145,7 @@ use mlvillage::ProjectRegister::IProjectRegister;
             max_supply.serialize(ref calldata);
 
             let (deployed_collection_address, _) = deploy_syscall(
-                self.model_nft_hash.read(), 
+                self.model_nft_hash.read(), //0x071f996af16f3dda77d0562c44eb732211db795392e51735743730fb531334e6
                 88888, 
                 calldata.span(), 
                 false
