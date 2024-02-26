@@ -1,17 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Navbar } from 'flowbite-react';
 import { Avatar} from "@/components/ui/avatar";
 import { FaShoppingCart, FaUser, FaRegCreditCard, FaWallet  } from "react-icons/fa";
 import useIsWalletConnected from '@/stores/web3Store/hooks/useIsWalletConnected';
 import useIsWalletModalOpen from '@/stores/web3Store/hooks/useIsWalletModalOpen';
 import useAddress from '@/stores/web3Store/hooks/useAddress';
+import useEthBalance from '@/stores/web3Store/hooks/useEthBalance';
 import { WalletModal } from '@//components/Modals/WalletModal';
+import useWalletId from '@/stores/web3Store/hooks/useWalletId';
+import useStarknetWallets from '@/stores/web3Store/hooks/useStarknetWallets';
+import useAccount from '@/stores/web3Store/hooks/useAccount';
+
 
 export const Navbase = ({navleft}) => {
 
     const [isWalletConnected] = useIsWalletConnected();
     const [, setIsWalletModalOpen] = useIsWalletModalOpen();
 	const [address] = useAddress();
+    //const [ethBalance] = useEthBalance();
+    const [walletId] = useWalletId();
+    const [starknetWallets] = useStarknetWallets();
+    const [account] = useAccount();
 
     return (
         <Navbar fluid rounded>

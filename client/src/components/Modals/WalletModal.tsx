@@ -1,5 +1,5 @@
 import React, {FC, useId, useEffect, useState} from 'react';
-import { Button, Modal } from 'flowbite-react';
+import { Modal } from 'flowbite-react';
 import useConnectWallet from '@/stores/web3Store/hooks/useConnectWallet';
 import useDisconnectWallet from '@/stores/web3Store/hooks/useDisconnectWallet';
 import useIsWalletConnected from '@/stores/web3Store/hooks/useIsWalletConnected';

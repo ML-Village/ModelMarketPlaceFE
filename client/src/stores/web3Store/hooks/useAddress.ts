@@ -1,4 +1,4 @@
-import Address from '@models/Address';
+import Address from '@/models/Address';
 import { useAtom } from 'jotai';
 import { addressAtom } from '../web3Store.atoms';
 
