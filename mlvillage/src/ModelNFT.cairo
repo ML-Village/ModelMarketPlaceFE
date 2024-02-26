@@ -21,7 +21,7 @@ trait IModel<TContractState> {
     fn byte_base_uri(self: @TContractState) -> ByteArray;
     
     //fn content_uri(self: @TContractState, token_id: u256) -> ByteArray;
-
+    fn get_parent_project(self: @TContractState) -> u256;
     fn set_base_uri(ref self: TContractState, base_uri: felt252);
     fn set_byte_base_uri(ref self: TContractState, base_uri: ByteArray);
     
@@ -74,7 +74,8 @@ mod Model {
         max_supply: u256,
         mint_start_time: u256,
         ERC721_base_uri: ByteArray,
-        base_uri: felt252
+        base_uri: felt252,
+        parent_project: u256
     }
 
     #[event]
@@ -119,9 +120,11 @@ mod Model {
         ref self: ContractState,
         name: felt252,
         symbol: felt252,
+        parent: u256,
         max_supply: u256,
     ) {
         self.erc721.initializer(name, symbol);
+        self.parent_project.write(parent);
         self.max_supply.write(max_supply);
         //self._mint_assets(recipient, token_ids, token_uris);
     }
@@ -224,6 +227,10 @@ mod Model {
 
         fn byte_base_uri(self: @ContractState) -> ByteArray {
             self.ERC721_base_uri.read()
+        }
+
+        fn get_parent_project(self: @ContractState) -> u256 {
+            self.parent_project.read()
         }
 
         fn set_base_uri(ref self: ContractState, base_uri: felt252) {
