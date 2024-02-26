@@ -2,8 +2,16 @@ import React from 'react';
 import { Navbar } from 'flowbite-react';
 import { Avatar} from "@/components/ui/avatar";
 import { FaShoppingCart, FaUser, FaRegCreditCard, FaWallet  } from "react-icons/fa";
+import useIsWalletConnected from '@/stores/web3Store/hooks/useIsWalletConnected';
+import useIsWalletModalOpen from '@/stores/web3Store/hooks/useIsWalletModalOpen';
+import useAddress from '@/stores/web3Store/hooks/useAddress';
 
 export const Navbase = ({navleft}) => {
+
+    const [isWalletConnected] = useIsWalletConnected();
+    const [, setIsWalletModalOpen] = useIsWalletModalOpen();
+	const [address] = useAddress();
+
     return (
         <Navbar fluid rounded>
             
@@ -11,20 +19,25 @@ export const Navbase = ({navleft}) => {
                 
                 {/* wallet area */}
                 <div className="flex justify-center items-center">
-                    {/* <div className="flex items-center
+
+                    {isWalletConnected ? 
+                        <div className="flex items-center
+                        mx-2 px-2 h-10 rounded-md
+                        bg-gray-300">
+                            <span className="mx-2" ><FaRegCreditCard/></span>
+                            <span className="mx-2">8.88</span>
+                            <span className="mr-4">ETH</span>
+                        </div>
+
+                        :
+
+                        <div className="flex items-center
                         mx-2 px-2 h-10 rounded-md
                         bg-gray-300">
                             <span className="mx-2" ><FaWallet/></span>
                             <span className="mx-2">Login</span>
-                        </div> */}
-
-                    <div className="flex items-center
-                    mx-2 px-2 h-10 rounded-md
-                    bg-gray-300">
-                        <span className="mx-2" ><FaRegCreditCard/></span>
-                        <span className="mx-2">8.88</span>
-                        <span className="mr-4">ETH</span>
-                    </div>
+                        </div> 
+                    }
 
                     <Avatar className="bg-gray-300 flex justify-center items-center">
                         <FaUser />
