@@ -13,7 +13,7 @@ trait IERC721MetadataCamelOnly<TState> {
 }
 
 #[starknet::interface]
-trait IModel<TContractState> {
+trait IModelNFT<TContractState> {
     // contract state read
     fn supply(self: @TContractState) -> u256;
     fn max_supply(self: @TContractState) -> u256;
@@ -32,7 +32,7 @@ trait IModel<TContractState> {
 }
 
 #[starknet::contract]
-mod Model {
+mod ModelNFT {
     use openzeppelin::introspection::src5::SRC5Component;
     use openzeppelin::token::erc721::ERC721Component;
     // use openzeppelin::access::ownable::OwnableComponent;
@@ -208,7 +208,7 @@ mod Model {
     }
 
     #[abi(embed_v0)]
-    impl ModelImpl of super::IModel<ContractState> {
+    impl ModelImpl of super::IModelNFT<ContractState> {
         //
         // Contract read
         //
