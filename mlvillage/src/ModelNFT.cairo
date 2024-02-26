@@ -21,7 +21,9 @@ trait IModelNFT<TContractState> {
     fn byte_base_uri(self: @TContractState) -> ByteArray;
     
     //fn content_uri(self: @TContractState, token_id: u256) -> ByteArray;
-    fn get_parent_project(self: @TContractState) -> u256;
+    fn get_parent_project_address(self: @TContractState) -> ContractAddress;
+    fn get_parent_project_id(self: @TContractState) -> u256; 
+
     fn set_base_uri(ref self: TContractState, base_uri: felt252);
     fn set_byte_base_uri(ref self: TContractState, base_uri: ByteArray);
     
@@ -75,7 +77,8 @@ mod ModelNFT {
         mint_start_time: u256,
         ERC721_base_uri: ByteArray,
         base_uri: felt252,
-        parent_project: u256
+        parent_project_address: ContractAddress,
+        parent_project_id: u256
     }
 
     #[event]
@@ -120,11 +123,13 @@ mod ModelNFT {
         ref self: ContractState,
         name: felt252,
         symbol: felt252,
-        parent: u256,
+        parent_project_address: ContractAddress,
+        parent_id: u256,
         max_supply: u256,
     ) {
         self.erc721.initializer(name, symbol);
-        self.parent_project.write(parent);
+        self.parent_project_address.write(parent_project_address);
+        self.parent_project_id.write(parent_id);
         self.max_supply.write(max_supply);
         //self._mint_assets(recipient, token_ids, token_uris);
     }
@@ -229,8 +234,12 @@ mod ModelNFT {
             self.ERC721_base_uri.read()
         }
 
-        fn get_parent_project(self: @ContractState) -> u256 {
-            self.parent_project.read()
+        fn get_parent_project_address(self: @ContractState) -> ContractAddress {
+            self.parent_project_address.read()
+        }
+
+        fn get_parent_project_id(self: @ContractState) -> u256 {
+            self.parent_project_id.read()
         }
 
         fn set_base_uri(ref self: ContractState, base_uri: felt252) {

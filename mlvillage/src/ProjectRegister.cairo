@@ -1,4 +1,5 @@
 use starknet::ContractAddress;
+use starknet::ClassHash;
 
 #[starknet::interface]
 trait IProjectRegister<TContractState> {
@@ -21,20 +22,26 @@ trait IProjectRegister<TContractState> {
 
     fn get_registerd_project_count(self: @TContractState) -> u256;
 
-    fn get_modelnft_hash(self: @TContractState) -> felt252;
+    fn get_modelnft_hash(self: @TContractState) -> ClassHash;
 
-    fn set_modelnft_hash(ref self: TContractState, hash: felt252);
+    fn set_modelnft_hash(ref self: TContractState, hash: ClassHash);
 
     // Add register create nft collection function
-    fn create_modelnft_collection(self: @TContractState, project_id: u256);
+    fn create_modelnft_collection(self: @TContractState, 
+        collection_name:felt252, collection_symbol: felt252,
+        parent_project_address: ContractAddress, max_supply:u256)-> ContractAddress;
 
 }
 
 #[starknet::contract]
 mod ProjectRegister {
 
+    use core::serde::Serde;
+use mlvillage::ProjectRegister::IProjectRegister;
     use starknet::ContractAddress;
-    use starknet::{StorePacking};
+    use starknet::deploy_syscall;
+    use starknet::ClassHash;
+    use array::ArrayTrait;
 
     #[derive(Drop, Serde, PartialEq, starknet::Store)]
     struct ProjecRecord {
@@ -49,7 +56,7 @@ mod ProjectRegister {
         projects_map: LegacyMap<u256, ProjecRecord>,
         project_address_to_id: LegacyMap<ContractAddress, u256>,
         project_count: u256,
-        model_nft_hash: felt252
+        model_nft_hash: ClassHash
     }
 
     // #[generate_trait]
@@ -57,8 +64,8 @@ mod ProjectRegister {
     // }
 
     #[constructor]
-    fn constructor(ref self: ContractState){
-
+    fn constructor(ref self: ContractState, model_nft_hash: ClassHash) {
+        self.model_nft_hash.write(model_nft_hash);
     }
 
     #[abi(embed_v0)]
@@ -109,17 +116,43 @@ mod ProjectRegister {
             self.project_count.read()
         }
 
-        fn get_modelnft_hash(self: @ContractState) -> felt252 {
+        fn get_modelnft_hash(self: @ContractState) -> ClassHash {
             self.model_nft_hash.read()
         }
 
-        fn set_modelnft_hash(ref self: ContractState, hash: felt252) {
+        fn set_modelnft_hash(ref self: ContractState, hash: ClassHash) {
             self.model_nft_hash.write(hash);
         }
-        
+
         // Add register create nft collection function
-        fn create_modelnft_collection(self: @ContractState, project_id: u256) {
+        fn create_modelnft_collection(self: @ContractState, 
+            collection_name:felt252, collection_symbol: felt252,
+            parent_project_address: ContractAddress, max_supply:u256) -> ContractAddress{
+            let mut calldata = ArrayTrait::new();
+
+            // name: felt252,
+            // symbol: felt252,
+            // parent_project_address: ContractAddress,
+            // parent_id: u256,
+            // max_supply: u256,
+            calldata.append(collection_name);
+            calldata.append(collection_symbol);
+            calldata.append(parent_project_address.into());
+
+            let parent_id_result = self.project_address_to_id.read(parent_project_address);
+            parent_id_result.serialize(ref calldata);
+
+            max_supply.serialize(ref calldata);
+
+            let (deployed_collection_address, _) = deploy_syscall(
+                self.model_nft_hash.read(), 
+                88888, 
+                calldata.span(), 
+                false
+            )
+            .unwrap();
             
+            deployed_collection_address
         }
     }
 
