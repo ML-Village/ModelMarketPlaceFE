@@ -20,6 +20,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.22.2
     version: 5.22.2(react@18.2.0)
+  bowser:
+    specifier: ^2.11.0
+    version: 2.11.0
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -2399,6 +2402,10 @@ packages:
 
   /bn.js@5.2.1:
     resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==}
+    dev: false
+
+  /bowser@2.11.0:
+    resolution: {integrity: sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA==}
     dev: false
 
   /brace-expansion@1.1.11:
