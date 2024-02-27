@@ -45,7 +45,7 @@ export const ResultsCard = ({
 
                             <div><span className="mr-1 font-semibold">project: </span>
                             <span className="bg-blue-300 px-2 py-1 rounded-md cursor-pointer
-                            hover:ring-2 hover:ring-blue-500
+                            hover:ring-2 hover:ring-blue-500 cursor-pointer
                             ">
                                 {project}
                             </span>
@@ -58,8 +58,10 @@ export const ResultsCard = ({
                                 <span>
                                     <span className="mr-1 font-semibold">Creator:</span>
                                     <span className="cursor-pointer border border-gray-300 rounded-md px-2 py-1
-                                    bg-yellow-100
-                                    ">
+                                    bg-yellow-100 hover:ring-2 hover:ring-yellow-500 cursor-pointer
+                                    "
+                                    onClick={()=>navigate(ROUTES.owner+`/${creator}`)}
+                                    >
                                         {creator}</span>
                                 </span>
                                 <span className="flex items-center">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from '@/constants/routing/routes';
-import { Home, CreateResource, CreateModel, ModelPage, Builders, Owners } from './pages';
+import { Home, CreateResource, CreateModel, ModelPage, Builders, Owners, ProjectsList, Project } from './pages';
 
 function App() {
 

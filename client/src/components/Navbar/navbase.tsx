@@ -54,7 +54,7 @@ export const Navbase = ({navleft}) => {
                     {isWalletConnected ? 
                         <div className="flex items-center
                         mx-2 px-2 h-10 rounded-md
-                        bg-gray-300"
+                        bg-gray-300 cursor-pointer"
                         onClick={()=>setIsWalletModalOpen(true)}
                         >
                             <span className="mx-2" ><FaRegCreditCard/></span>
@@ -68,7 +68,7 @@ export const Navbase = ({navleft}) => {
 
                         <div className="flex items-center
                         mx-2 px-2 h-10 rounded-md
-                        bg-gray-300" 
+                        bg-gray-300 cursor-pointer" 
                         onClick={()=>setIsWalletModalOpen(true)}
                         >
                             <span className="mx-2" ><FaWallet/></span>
@@ -76,12 +76,12 @@ export const Navbase = ({navleft}) => {
                         </div> 
                     }
 
-                    <Avatar className="bg-gray-300 flex justify-center items-center">
+                    <Avatar className="bg-gray-300 flex justify-center items-center cursor-pointer">
                         <FaUser />
                     </Avatar>
 
                     <div className="bg-gray-300 aspect-square w-10 mx-2
-                    flex justify-center items-center rounded-md
+                    flex justify-center items-center rounded-md cursor-pointer
                     ">
                         <FaShoppingCart />
                     </div>
