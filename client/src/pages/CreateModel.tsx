@@ -5,7 +5,8 @@ import { TbCircleNumber1, TbCircleNumber2,
     TbCircleNumber3, TbCircleNumber4 } from "react-icons/tb";
 
 import { Status, statuses, projectParamMapping } from '@/constants/createresource_projectslist';
-
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routing/routes';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +38,8 @@ export const CreateModel = () => {
     
     const [showUploadModelSpinner, setShowUploadModelSpinner] = useState(false);
     const [showInitializeModelSpinner, setShowInitializeModelSpinner] = useState(false);
+
+    const navigate = useNavigate();
 
     const delayUploadModelSpinner = () => {
         setShowUploadModelSpinner(true); // Show the spinner
@@ -117,12 +120,13 @@ export const CreateModel = () => {
                             </div>
                         
                         {/* image div of project cover */}
-                        <div className="w-4/5 h-32 border rounded-md border-black/80 bg-black"
+                        <div className="w-4/5 h-32 border rounded-md border-black/80 bg-black cursor-pointer"
                             style={{backgroundImage: `url(${project_cover_path})`,
                                     backgroundSize: "cover",
                                     backgroundRepeat: "no-repeat",
                                     backgroundPosition: "center center"
                                     }}
+                            onClick={()=>navigate(ROUTES.project+`/${selectedStatus?.value}`)}
                         >
 
                         </div>

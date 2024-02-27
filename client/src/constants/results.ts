@@ -62,18 +62,6 @@ export const availableModels = [
         tags: ["deckbuilding"]
     },
     {
-        projectcoverurl: "/gameimages/pokemonshowdown.jpg" ,
-        modelname: "Trainer88" ,
-        project: "PokemonShowDown",
-        description:"Picks the best move and best Pokemon to battle",
-        creator:addressShortener("0x8ed8426df79CA5972DfD09A01647D2EFe02cB901"),
-        creatorrating:4.5,
-        efficiency:"90.8%",
-        floorprice:"1.00 ETH",
-        remaining:"768",
-        tags: ["pokebattle"]
-    },
-    {
         projectcoverurl: "/gameimages/skystrife.png" ,
         modelname: "NeverlandOwner365" ,
         project: "SkyStrife.XYZ",
@@ -84,5 +72,17 @@ export const availableModels = [
         floorprice:"1.00 ETH",
         remaining:"768",
         tags: ["chessbattle"]
+    },
+    {
+        projectcoverurl: "/gameimages/pokemonshowdown.jpg" ,
+        modelname: "Trainer88" ,
+        project: "PokemonShowDown",
+        description:"Picks the best move and best Pokemon to battle",
+        creator:addressShortener("0x8ed8426df79CA5972DfD09A01647D2EFe02cB901"),
+        creatorrating:4.5,
+        efficiency:"90.8%",
+        floorprice:"1.00 ETH",
+        remaining:"768",
+        tags: ["pokebattle"]
     }
 ]

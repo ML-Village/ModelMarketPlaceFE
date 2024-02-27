@@ -12,7 +12,7 @@ export const Navlogohome = () => {
             <Navbar.Brand href={import.meta.env.VITE_HOSTURL} 
                 className="mx-6"
                 >
-                    <img src="mlvillagelogo.png" className="h-6 mr-3 sm:h-9" alt="ML Village Logo"/>
+                    <img src="/mlvillagelogo.png" className="h-6 mr-3 sm:h-9" alt="ML Village Logo"/>
                     <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">ML Village</span>
                 </Navbar.Brand>
                     

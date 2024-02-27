@@ -31,6 +31,8 @@ export const ResultsCard = ({
                                     backgroundRepeat: "no-repeat",
                                     backgroundPosition: "center center"
                                     }}
+
+                                onClick={()=>{navigate(ROUTES.project+`/${project.replace(/\s/g, '').toLowerCase()}`)}}
                             >
                                 
                             </div>

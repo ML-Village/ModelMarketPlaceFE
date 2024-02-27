@@ -16,6 +16,9 @@ function App() {
                 <Route path={ROUTES.builders} element={<Builders />} />
                 <Route path={ROUTES.owner+"/:id"} element={<Owners />} />
 
+                <Route path={ROUTES.projects} element={<ProjectsList />} />
+                <Route path={ROUTES.project+"/:id"} element={<Project />} />
+
             </Routes>
         </Router>
   )
