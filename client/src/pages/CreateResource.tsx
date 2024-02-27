@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { CreateNavBar } from '@/components/Navbar';
 import { BiDumbbell } from "react-icons/bi";
 import { FaBridge } from "react-icons/fa6";
 import { HiArrowUpOnSquareStack } from "react-icons/hi2";
+import { Status, statuses, projectParamMapping } from '@/constants/createresource_projectslist';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,52 +20,46 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { TextInput, Spinner } from 'flowbite-react';
 
-import { TextInput } from 'flowbite-react';
-
-type Status = {
-    value: string
-    label: string
-}
-const statuses: Status[] = [
-    {
-        value: "influence",
-        label: "Influence",
-    },
-    {
-        value: "lootsurvivor",
-        label: "Loot Survivor",
-    },
-    {
-        value: "pistolsat10blocks",
-        label: "Pistols At 10 Blocks",
-    },
-    {
-        value: "rollyourown",
-        label: "Roll Your Own",
-    },
-    {
-        value: "tsubasa",
-        label: "Tsubasa",
-    },
-    {
-        value: "pokemonshowdown",
-        label: "Pokemon Showdown",
-    },
-    {
-        value: "skystrife",
-        label: "Sky Strife",
-    },
-]
 
 export const CreateResource = () => {
     const [open, setOpen] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState<Status | null>(
         null
     )
+    const [showProjectRegisterSpinner, setShowProjectRegisterSpinner] = useState(false);
+    const [showProjectResourceSubmitSpinner, setShowProjectResourceSubmitSpinner] = useState(false);
+
+    const [ project_address, setProjectAddress ] = useState<string|undefined>(undefined)
+    const [ project_url, setProjectUrl ] = useState<string|undefined>(undefined)
+    const [ project_cover_path, setProjectCover ] = useState<string|undefined>(undefined)
+    
+    useEffect(() => {
+        setProjectAddress(selectedStatus ? projectParamMapping[selectedStatus.value]?.project_address : undefined)
+        setProjectUrl(selectedStatus ? projectParamMapping[selectedStatus.value]?.project_url : undefined)
+        setProjectCover(selectedStatus ? projectParamMapping[selectedStatus.value]?.project_cover_path : undefined)
+    },[selectedStatus])
+
+    const delayRegisterProjectSpinner = () => {
+        setShowProjectRegisterSpinner(true); // Show the spinner
+    
+        setTimeout(() => {
+            setShowProjectRegisterSpinner(false); // Hide the spinner after 5 seconds
+        }, 2000); // 2000 milliseconds = 2 seconds
+    };
+
+    const delayProjectResourceSubmitSpinner = () => {
+        setShowProjectResourceSubmitSpinner(true); // Show the spinner
+    
+        setTimeout(() => {
+            setShowProjectResourceSubmitSpinner(false); // Hide the spinner after 5 seconds
+        }, 2000); // 2000 milliseconds = 2 seconds
+    };
+
 
     return (
-        <div>
+        <div className="pb-20">
             <CreateNavBar title="Create Project Resources" />
             
             <div className="container mx-auto mt-5 flex justify-between items-start
@@ -93,7 +88,9 @@ export const CreateResource = () => {
                                 <Button variant="outline" 
                                 className="justify-start
                                 w-full border-l-black rounded-none
-                                ">
+                                "
+                                id="parent_project_button"
+                                >
                                     {selectedStatus ? <>{selectedStatus.label}</> : <>+ Select Parent Project</>}
                                 </Button>
                             </PopoverTrigger>
@@ -127,17 +124,28 @@ export const CreateResource = () => {
 
                     {/* project address input */}
                     <div className="border border-black w-4/5 rounded-md">
-                        <TextInput id="contractaddress" placeholder="Project Main Contract" addon="Project_Address" required />
+                        <TextInput id="contractaddress" placeholder="Project Main Contract" addon="Project_Address" value={project_address} />
                     </div>
 
                     {/* project url input */}
                     <div className="border border-black w-4/5 rounded-md">
-                        <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" required />
+                        <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" value={project_url} />
                     </div>
 
                     {/* image div of project cover */}
                     <div className="w-4/5 h-32 
-                        border border-black/80 rounded-md" />
+                        border border-black/80 rounded-md
+                        bg-black
+                        " 
+                    
+                    style={{
+                        backgroundImage: `url(${project_cover_path})`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center center"
+                    }}
+                    
+                    />
 
                     <div className="w-4/5
                     text-3xl font-semibold flex flex-col gap-2">
@@ -166,11 +174,15 @@ export const CreateResource = () => {
                     </div>
 
                     {/* new project register button */}
-                    <div className="flex w-4/5 ">
+                    <div className="flex w-4/5 items-center gap-4">
                         <button className="bg-orange-300 hover:bg-orange-500
                         font-semibold hover:text-white
                         px-4 py-2 rounded-md flex justify-center items-center
-                        ">Register New Project</button>
+                        "
+                        onClick={delayRegisterProjectSpinner}
+                        >Register New Project</button>
+                        <Spinner className={`${!showProjectRegisterSpinner?"hidden":""}`} size="xl" color="warning"
+                        aria-label="waiting for project registration" />
                     </div>
 
 
@@ -200,11 +212,14 @@ export const CreateResource = () => {
                     </div>
 
                     {/* project resource submission button */}
-                    <div className="flex w-4/5 ">
+                    <div className="flex w-4/5 items-center gap-4">
                         <button className="bg-green-300 hover:bg-green-500
                         font-semibold hover:text-white
                         px-4 py-2 rounded-md flex justify-center items-center
-                        ">Submit Project Resource</button>
+                        "
+                        onClick={delayProjectResourceSubmitSpinner}
+                        >Submit Project Resource</button>
+                        <Spinner className={`${!showProjectResourceSubmitSpinner?"hidden":""}`} size="xl" color="success"/>
                     </div>
 
                 </div>
