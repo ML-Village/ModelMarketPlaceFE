@@ -6,6 +6,8 @@ import { projectModels } from '@/constants/project_models_listing';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/constants/routing/routes';
 
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+
 export const Project = () => {
 
     const projectnamekey  = useParams()?.id;
@@ -18,7 +20,7 @@ export const Project = () => {
                     flex flex-col rounded-md items-center
                     ">
                     
-                    <div className="w-full h-[250px] bg-black" 
+                    <div className="w-full h-[250px] bg-black border border-black rounded-md" 
                     style={{backgroundImage: `url(${projectParamMapping[projectnamekey as string]?.project_cover_path})`,}}
                     
                     />
@@ -67,7 +69,14 @@ export const Project = () => {
                                                     <span>Model Name: <span>{r.modelname}</span></span>
                                                     <span>Model Description: <span className="text-gray-600">{r.description}</span> </span>
                                                     <span>Creator: <span className="rounded-md bg-yellow-300 px-2 py-1">{r.creator}</span></span>
-                                                    <span>Creator Rating: </span>
+                                                    <span className="flex items-center">Creator Rating: 
+                                                        <span className="flex flex-nowrap text-yellow-500">
+                                                        <FaStar />
+                                                        <FaStar />
+                                                        <FaStar />
+                                                        <FaStarHalfAlt />
+                                                        <FaRegStar />
+                                                </span></span>
                                                 </div>
 
                                                 <div className="w-2/5 flex flex-col justify-center items-start">
