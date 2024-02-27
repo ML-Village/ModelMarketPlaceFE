@@ -3,19 +3,11 @@ import { BasePageTemplate } from '@/components/Base';
 import { MdGridOn } from "react-icons/md";
 import { TbDiscountCheckFilled } from "react-icons/tb";
 import { IoFilter } from "react-icons/io5";
-
+import { filterlist } from '@/constants/filterlist';
 import { Results } from '@/components/Results';
 
 export const Home = () => {
     const [selectedFilter, setSelectedFilter ] = useState("Gaming")
-
-    const filterlist = [
-        "Defi",
-        "NFT-fi",
-        "DEX-trading",
-        "Arbitrage",
-        "Gaming"
-    ]
 
     return (
         <BasePageTemplate>
@@ -45,10 +37,10 @@ export const Home = () => {
                                         px-2 py-1 rounded-md cursor-pointer
                                         ${selectedFilter==n? 
                                             "bg-orange-500 text-black font-semibold"
-                                            : "bg-orange-200 text-gray-400 hover:text-white hover:bg-orange-300"
+                                            : "bg-orange-300 text-gray-500 hover:text-black hover:bg-orange-300"
                                         }
                                             `}
-                                        
+                                        key={`tab-${n}`}
                                         onClick={()=>setSelectedFilter(n)}
                                         >
                                                 {n}

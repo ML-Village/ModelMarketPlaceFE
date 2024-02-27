@@ -2,6 +2,8 @@ import React from 'react';
 import { Card } from 'flowbite-react';
 import { Badge } from 'flowbite-react';
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routing/routes';
 
 export const ResultsCard = ({
     projectcoverurl,
@@ -15,6 +17,8 @@ export const ResultsCard = ({
     remaining,
     tags
     }) => {
+
+    const navigate = useNavigate();
     return (
         <Card
                             
@@ -33,7 +37,9 @@ export const ResultsCard = ({
                                 
                             }
                             >
-                            <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                            onClick={()=>{navigate(ROUTES.model+`/${modelname}`)}}
+                            >
                                 {modelname}
                             </div>
 

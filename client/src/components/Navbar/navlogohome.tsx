@@ -20,8 +20,8 @@ export const Navlogohome = () => {
                     <div className="flex justify-center items-center gap-3
                     text-orange-500
                     mx-4">
-                        <span className="hover:font-bold">Builders</span>
-                        <span className="hover:font-bold">Projects</span>
+                        <span className="hover:font-bold cursor-pointer" onClick={()=>navigate(ROUTES.builders)}>Builders</span>
+                        <span className="hover:font-bold cursor-pointer">Projects</span>
                         <Dropdown label={<span className="hover:font-bold">Create</span>} inline arrowIcon={false}
                         className=""
                         >

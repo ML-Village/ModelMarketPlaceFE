@@ -4,7 +4,7 @@ import { availableModels } from '@/constants/results';
 
 export const Results = () => {
 
-    console.log(availableModels)
+    //console.log(availableModels)
     return (
         <div className="mt-5 grid grid-cols-3 gap-1 gap-y-2">
                 {

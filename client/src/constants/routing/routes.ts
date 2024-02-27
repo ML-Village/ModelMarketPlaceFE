@@ -6,5 +6,8 @@ export const ROUTES = {
     trainingapi: "trainingapi",
     interfacewrapper: "interfacewrapper",
     createmodel: "/createmodel",
+    model: "/model",
+    builders: "/builders",
+    owner: "/owner",
     listings: "/listings"
 };
