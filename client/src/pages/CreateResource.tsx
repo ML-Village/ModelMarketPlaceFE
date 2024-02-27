@@ -230,7 +230,7 @@ export const CreateResource = () => {
                 ">
                     
                     <p className="font-semibold text-lg">
-                    If there is a Project Contract deployed, you'll be able to:
+                    If there is a <u>Parent Project Registered</u>, you'll be able to:
                     </p>
 
                     <p className="my-2 flex items-center gap-4 justify-between font-semibold text-black/70">

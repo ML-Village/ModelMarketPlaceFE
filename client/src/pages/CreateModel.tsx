@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { CreateNavBar } from '@/components/Navbar';
 
 import { TbCircleNumber1, TbCircleNumber2,
     TbCircleNumber3, TbCircleNumber4 } from "react-icons/tb";
+
+import { Status, statuses, projectParamMapping } from '@/constants/createresource_projectslist';
 
 
 import { Button } from "@/components/ui/button";
@@ -20,52 +22,46 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { TextInput, FileInput, Label, Checkbox } from 'flowbite-react';
+import { TextInput, FileInput, Label, Checkbox, Spinner } from 'flowbite-react';
 import { Check } from 'lucide-react';
-
-type Status = {
-    value: string
-    label: string
-}
-const statuses: Status[] = [
-    {
-        value: "influence",
-        label: "Influence",
-    },
-    {
-        value: "lootsurvivor",
-        label: "Loot Survivor",
-    },
-    {
-        value: "pistolsat10blocks",
-        label: "Pistols At 10 Blocks",
-    },
-    {
-        value: "rollyourown",
-        label: "Roll Your Own",
-    },
-    {
-        value: "tsubasa",
-        label: "Tsubasa",
-    },
-    {
-        value: "pokemonshowdown",
-        label: "Pokemon Showdown",
-    },
-    {
-        value: "skystrife",
-        label: "Sky Strife",
-    },
-]
 
 export const CreateModel = () => {
     const [open, setOpen] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState<Status | null>(
         null
     )
+    
+    const [ project_address, setProjectAddress ] = useState<string|undefined>(undefined)
+    const [ project_url, setProjectUrl ] = useState<string|undefined>(undefined)
+    const [ project_cover_path, setProjectCover ] = useState<string|undefined>(undefined)
+    
+    const [showUploadModelSpinner, setShowUploadModelSpinner] = useState(false);
+    const [showInitializeModelSpinner, setShowInitializeModelSpinner] = useState(false);
+
+    const delayUploadModelSpinner = () => {
+        setShowUploadModelSpinner(true); // Show the spinner
+    
+        setTimeout(() => {
+            setShowUploadModelSpinner(false); // Hide the spinner after 5 seconds
+        }, 2000); // 2000 milliseconds = 2 seconds
+    };
+
+    const delayModelMintInitializeSpinner = () => {
+        setShowInitializeModelSpinner(true); // Show the spinner
+    
+        setTimeout(() => {
+            setShowInitializeModelSpinner(false); // Hide the spinner after 5 seconds
+        }, 2000); // 2000 milliseconds = 2 seconds
+    };
+
+    useEffect(() => {
+        setProjectAddress(selectedStatus ? projectParamMapping[selectedStatus.value]?.project_address : undefined)
+        setProjectUrl(selectedStatus ? projectParamMapping[selectedStatus.value]?.project_url : undefined)
+        setProjectCover(selectedStatus ? projectParamMapping[selectedStatus.value]?.project_cover_path : undefined)
+    },[selectedStatus])
 
     return (
-        <div>
+        <div className="pb-20">
             <CreateNavBar title="Create Model for Project" />
             <div className="container flex items-start justify-between px-10 py-4 mx-auto mt-5 ">
             
@@ -121,18 +117,24 @@ export const CreateModel = () => {
                             </div>
                         
                         {/* image div of project cover */}
-                        <div className="w-4/5 h-32 border rounded-md border-black/80">
+                        <div className="w-4/5 h-32 border rounded-md border-black/80 bg-black"
+                            style={{backgroundImage: `url(${project_cover_path})`,
+                                    backgroundSize: "cover",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "center center"
+                                    }}
+                        >
 
                         </div>
 
                         {/* project address input */}
                         <div className="w-4/5 border border-black rounded-md">
-                            <TextInput id="contractaddress" placeholder="Project Main Contract" addon="Project_Address" required />
+                            <TextInput id="contractaddress" placeholder="Project Main Contract" addon="Project_Address" value={project_address}  />
                         </div>
 
                         {/* project url input */}
                         <div className="w-4/5 border border-black rounded-md">
-                            <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" required />
+                            <TextInput id="projectsite" placeholder="Project HomePage" addon="Project_URL" value={project_url}/>
                         </div>
                         
 
@@ -154,8 +156,12 @@ export const CreateModel = () => {
                         </div>
 
                         {/* model upload button */}
-                        <div className="flex w-4/5 ">
-                            <button className="flex items-center justify-center px-4 py-2 font-semibold bg-blue-300 rounded-md hover:bg-blue-500 hover:text-white ">Upload Model to IPFS</button>
+                        <div className="flex w-4/5 items-center gap-4">
+                            <button className="flex items-center justify-center px-4 py-2 font-semibold bg-blue-300 
+                            rounded-md hover:bg-blue-500 hover:text-white "
+                            onClick={delayUploadModelSpinner}
+                            >Upload Model to IPFS</button>
+                            <Spinner className={`${!showUploadModelSpinner? "hidden":""}`} size="xl" color="info"/>
                         </div>
 
                         {/* 3. Set Sales Params */}
@@ -199,8 +205,13 @@ export const CreateModel = () => {
                         </div>
                         
                         {/* model mint intialize button */}
-                        <div className="flex w-4/5 ">
-                            <button className="flex items-center justify-center px-4 py-2 font-semibold bg-green-300 rounded-md hover:bg-green-500 hover:text-white ">Initialize Model Mint!</button>
+                        <div className="flex w-4/5 items-center gap-4">
+                            <button className="flex items-center justify-center px-4 py-2 
+                            font-semibold bg-green-300 rounded-md hover:bg-green-500 hover:text-white
+                            "
+                            onClick={delayModelMintInitializeSpinner}
+                            >Initialize Model Mint!</button>
+                            <Spinner className={`${!showInitializeModelSpinner?"hidden":""}`} size="xl" color="success"/>
                         </div>
 
 
@@ -211,6 +222,42 @@ export const CreateModel = () => {
                 <div className="rounded-lg w-[400px]
                     px-10 py-10 bg-gray-300 ml-auto
                     ">
+                        <p className="flex font-semibold text-lg gap-2 my-2 mb-4">
+                            <TbCircleNumber1 className="text-7xl"/>
+                            <div>Select from a list of Registerd Parent Projects to associate your model collection to.</div>
+                        </p>
+
+                        <p className="flex font-semibold text-lg gap-2 my-2 mb-4">
+                            <TbCircleNumber2 className="text-3xl"/>
+                            <div>Upload a game agent model to IPFS.</div>
+                        </p>
+
+                        <p className="my-2 flex items-center gap-4 justify-between font-semibold text-black/70">
+                            <div className="w-2/5 flex justify-center items-center text-xl"></div>
+                            <div className="">Once you have uploaded the model and received the model URI link, our backend will initialize Giza backend to 
+                            convert your model to Cairo code and upload that to IPFS as well.
+                            </div>
+                        </p>
+
+                        <p className="flex font-semibold text-lg gap-2 my-2 mb-4">
+                            <TbCircleNumber3 className="text-8xl"/>
+                            <div>To start creating your model collection for listing and sale, enter the sales parameters and initialize mint.</div>
+                        </p>
+
+                        <p className="my-2 flex items-center gap-4 justify-start font-semibold text-black/70">
+                            <div className="w-2/5 flex justify-center items-center text-xl"></div>
+                            <div className="">The action of initializing mint here will cause the Project Registration Contract to deploy an 
+                            NFT contract that points to the parent project registration ID and contract address. This helps prove ownership of model and 
+                            usage in parent game sessions.
+                            </div>
+                        </p>
+
+                        <p className="my-2 flex items-center gap-4 justify-start font-semibold text-black/70">
+                            <div className="w-1/5 flex justify-center items-center text-xl"></div>
+                            <div className="">You can then click on the project cover to view your model 
+                            collection under the project page in the Marketplace.
+                            </div>
+                        </p>
 
                     </div>
             </div>
